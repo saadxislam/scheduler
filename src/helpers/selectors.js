@@ -18,6 +18,8 @@ export function getAppointmentsForDay(state, dayName) {
   
 }
 
+//Paige's way of doing it:
+
 // export function getAppointmentsForDay(state, day) {
 //   const filteredDays = state.days.find((dayObj) => dayObj.name === day);
 //   const apptArray = [];
