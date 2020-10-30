@@ -5,6 +5,7 @@ import Show from "components/Appointment/Show.js";
 import Empty from "components/Appointment/Empty.js";
 import useVisualMode from "hooks/useVisualMode";
 import Form from "components/Appointment/Form.js";
+import Status from "components/Appointment/Status.js";
 
 
 
@@ -19,8 +20,9 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    props.bookInterview(props.id, interview);
-    transition(SHOW);
+    transition(SAVING)
+    props.bookInterview(props.id, interview)
+      .then(() => {transition(SHOW)});
   }
 
   const { mode, transition, back } = useVisualMode(
@@ -40,6 +42,8 @@ export default function Appointment(props) {
           interviewer={props.interview.interviewer}
         />
       )}
+      {mode === SAVING && <Status message="Saving" />}
+
     </article>
   );
 }
