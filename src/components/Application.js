@@ -120,10 +120,21 @@ export default function Application(props) {
       .then(() => {
         setState({...state, appointments});
       })
+
+
 }
 
-
+function cancelInterview(id) {
+  return axios.delete(`/api/appointments/${id}`)
+    .then(() => {
+      const nullAppointment = {
+        ...state.appointments[id],
+        interview: null
+    }
+})
+}
   // const setDays = (days) => setState((prev) => ({ ...prev, days }));
+
 
 
   return (
@@ -155,6 +166,7 @@ export default function Application(props) {
               interview={interview}
               interviewers= {interviewers}
               bookInterview= {bookInterview}
+              cancelInterview={cancelInterview}
             />
           );
         })}
