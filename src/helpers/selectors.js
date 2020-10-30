@@ -49,6 +49,7 @@ export function getInterview(state, interview) {
 
 export function getInterviewersForDay(state, dayName) {
   const filteredDay = state.days.filter(day => day.name === dayName);
+  console.log('filteredDay :', filteredDay);
 
   if (filteredDay.length === 0 || state.days.length === 0) {
     return [];
@@ -61,6 +62,7 @@ export function getInterviewersForDay(state, dayName) {
     return state.interviewers[id]
   })
 
+  console.log('foundInterviewers :', foundInterviewers);
   return foundInterviewers;
 
 }
