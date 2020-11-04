@@ -31,7 +31,7 @@ export default function useApplicationData(props) {
     const dayObj = days[dayIndex]
     // console.log('dayObj :', dayObj);
     const appointmentIDs = dayObj.appointments;
-    console.log('appointmentIDs :', appointmentIDs);
+    // console.log('appointmentIDs :', appointmentIDs);
 
     let spots = 0;
     for (const id of appointmentIDs) {
