@@ -28,7 +28,7 @@ export default function useApplicationData(props) {
 
   const updateSpots = (day, days, appointments) => {
     const dayObj = days.find((d) => d.name === day);
-    console.log('dayObj :', dayObj);
+    // console.log('dayObj :', dayObj);
     const appointmentIDs = dayObj.appointments;
 
     let spots = 0;
