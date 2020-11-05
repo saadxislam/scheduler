@@ -2,7 +2,7 @@
 
 ## Screenshots
 
-![Screengrab]("https://giphy.com/embed/yCgMxpXa46aKgTX1i4")
+![Screengrab](https://github.com/saadxislam/scheduler/blob/master/docs/Animated%20GIF-social.gif)
 !["Delete confirmation"](https://github.com/saadxislam/scheduler/blob/master/docs/delete-confirm.png)
 !["Empty day view"](https://github.com/saadxislam/scheduler/blob/master/docs/empty-day.png)
 !["New appointment"](https://github.com/saadxislam/scheduler/blob/master/docs/new-appt.png)

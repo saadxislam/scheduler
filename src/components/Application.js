@@ -16,6 +16,7 @@ export default function Application(props) {
   const data = useApplicationData();
   const { state, setDay, bookInterview, cancelInterview } = data;
 
+  // Helper functions called
   const appointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
 
