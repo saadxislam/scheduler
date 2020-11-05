@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+// Functions used to update state upon booking and cancelling an Interview
 export default function useApplicationData(props) {
   const [state, setState] = useState({
     day: "Monday",
@@ -9,6 +10,7 @@ export default function useApplicationData(props) {
     interviewers: {},
   });
 
+  // Calls to Server
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
@@ -28,10 +30,8 @@ export default function useApplicationData(props) {
 
   const updateSpots = (day, days, appointments) => {
     const dayIndex = days.findIndex((d) => d.name === day);
-    const dayObj = days[dayIndex]
-    // console.log('dayObj :', dayObj);
+    const dayObj = days[dayIndex];
     const appointmentIDs = dayObj.appointments;
-    // console.log('appointmentIDs :', appointmentIDs);
 
     let spots = 0;
     for (const id of appointmentIDs) {
@@ -41,7 +41,7 @@ export default function useApplicationData(props) {
       }
     }
 
-    let newDayObj = {...dayObj, spots};
+    let newDayObj = { ...dayObj, spots };
 
     let newDaysArray = [...days];
     newDaysArray[dayIndex] = newDayObj;
@@ -49,9 +49,8 @@ export default function useApplicationData(props) {
     // dayObj.spots = spots;
     return newDaysArray;
   };
-  
+
   const bookInterview = (id, interview) => {
-    // console.log(id, interview);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -64,11 +63,9 @@ export default function useApplicationData(props) {
 
     return axios.put(`api/appointments/${id}`, appointment).then(() => {
       let newDays = updateSpots(state.day, state.days, appointments);
-      setState({ ...state, appointments , days: newDays });
+      setState({ ...state, appointments, days: newDays });
     });
   };
-
-
 
   const cancelInterview = (id) => {
     const appointment = {

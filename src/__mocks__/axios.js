@@ -1,5 +1,3 @@
-
-
 const fixtures = {
   days: [
     {
@@ -55,6 +53,8 @@ const fixtures = {
   },
 };
 
+//Mocking axios requests for testing
+
 export default {
   get: jest.fn((url) => {
     if (url === "/api/days") {
@@ -82,7 +82,6 @@ export default {
         data: fixtures.interviewers,
       });
     }
-    
   }),
   put: jest.fn((url) => {
     return Promise.resolve({

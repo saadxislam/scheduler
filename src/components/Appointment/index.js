@@ -9,43 +9,40 @@ import Status from "components/Appointment/Status.js";
 import Confirm from "components/Appointment/Confirm.js";
 import Error from "components/Appointment/Error.js";
 
-
-
 export default function Appointment(props) {
+  // Transition Views
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
-  const CREATE = 'CREATE';
-  const SAVING = 'SAVING';
-  const DELETING = 'DELETING';
+  const CREATE = "CREATE";
+  const SAVING = "SAVING";
+  const DELETING = "DELETING";
   const CONFIRM = "CONFIRMING";
-  const EDITING = 'EDITING';
-  const ERROR_SAVE = 'ERROR_SAVE';
-  const ERROR_DELETE = 'ERROR_DELETE';  
+  const EDITING = "EDITING";
+  const ERROR_SAVE = "ERROR_SAVE";
+  const ERROR_DELETE = "ERROR_DELETE";
 
-
-
+  // Save an appointment
   function save(name, interviewer) {
     const interview = {
       student: name,
-      interviewer
+      interviewer,
     };
-    transition(SAVING)
-    props.bookInterview(props.id, interview)
-      .then(() => {transition(SHOW)})
-      .catch((error) =>{
-        console.log('ERROR!', error)
-        transition(ERROR_SAVE, true)
-      }) 
-      
+    transition(SAVING);
+    props
+      .bookInterview(props.id, interview)
+      .then(() => {
+        transition(SHOW);
+      })
+      .catch((error) => {
+        transition(ERROR_SAVE, true);
+      });
   }
-  
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
 
   // Delete an appointment
-
   function cancel() {
     transition(DELETING, true);
     props
@@ -53,37 +50,42 @@ export default function Appointment(props) {
       .then(() => {
         transition(EMPTY);
       })
-      .catch(error => transition(ERROR_DELETE, true))
+      .catch((error) => transition(ERROR_DELETE, true));
   }
 
-  function edit(){
+  function edit() {
     transition(EDITING);
   }
-
-
-
 
   return (
     <article className="appointment" data-testid="appointment">
       <Header time={props.time} />
-      {mode === EMPTY && <Empty 
-      onAdd={() => {return transition(CREATE)}} />
-      }
+      {mode === EMPTY && (
+        <Empty
+          onAdd={() => {
+            return transition(CREATE);
+          }}
+        />
+      )}
 
-      {mode === CREATE && <Form 
-      interviewers={props.interviewers} 
-      onCancel={() => {return back(EMPTY)}} 
-      onSave={save}/>
-      }
+      {mode === CREATE && (
+        <Form
+          interviewers={props.interviewers}
+          onCancel={() => {
+            return back(EMPTY);
+          }}
+          onSave={save}
+        />
+      )}
 
       {mode === EDITING && (
-      <Form
-        name={props.interview.student}
-        interviewer={props.interview.interviewer.id}
-        interviewers={props.interviewers}
-        onSave={save}
-        onCancel={back}
-      />
+        <Form
+          name={props.interview.student}
+          interviewer={props.interview.interviewer.id}
+          interviewers={props.interviewers}
+          onSave={save}
+          onCancel={back}
+        />
       )}
 
       {mode === SHOW && (
@@ -91,18 +93,20 @@ export default function Appointment(props) {
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           onDelete={() => transition(CONFIRM)}
-          onEdit = {()=> transition(EDITING)}
+          onEdit={() => transition(EDITING)}
         />
       )}
 
       {mode === SAVING && <Status message="Saving" />}
       {mode === DELETING && <Status message="Deleting" />}
-      {mode === CONFIRM && <Confirm
+      {mode === CONFIRM && (
+        <Confirm
           onCancel={back}
           onConfirm={cancel}
-          message="Are you sure you would like to delete?!" />
-      }
-          {mode === ERROR_SAVE && (
+          message="Are you sure you would like to delete?!"
+        />
+      )}
+      {mode === ERROR_SAVE && (
         <Error
           message="There was an error saving your appointment"
           onClose={back}
@@ -114,8 +118,6 @@ export default function Appointment(props) {
           onClose={back}
         />
       )}
-
-
     </article>
   );
 }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// Helper function passed to Index.js to update state for transitions
 export default function useVisualMode(initial) {
   const [state, setState] = useState([initial]);
 
@@ -20,11 +21,8 @@ export default function useVisualMode(initial) {
     }
     const newState = [...state];
     newState.pop();
-    // console.log("newState :", newState);
     setState(newState);
   };
-  // console.log(state);
-  const mode = state.slice(-1)[0]; //state[state.length-1]
-  // console.log('mode :', mode);
+  const mode = state.slice(-1)[0];
   return { mode, transition, back };
 }

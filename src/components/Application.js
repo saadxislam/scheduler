@@ -14,12 +14,7 @@ import "components/Application.scss";
 
 export default function Application(props) {
   const data = useApplicationData();
-  const {
-    state,
-    setDay,
-    bookInterview,
-    cancelInterview,
-  } = data;
+  const { state, setDay, bookInterview, cancelInterview } = data;
 
   const appointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
