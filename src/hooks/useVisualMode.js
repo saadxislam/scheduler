@@ -16,7 +16,6 @@ export default function useVisualMode(initial) {
 
   const back = function () {
     if (state.length < 2) {
-      // state.length = 1
       return;
     }
     const newState = [...state];
